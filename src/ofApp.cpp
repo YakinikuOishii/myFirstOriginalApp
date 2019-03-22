@@ -2,36 +2,34 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofEnableAlphaBlending();
-    ofBackground(24, 168, 192);
-    ofSetColor(255, 255, 255, 200);
+//    backGroundImage.load("night.jpg");
+    ofSetVerticalSync(true);
+    ofSetFrameRate(60);
+    ofBackground(0, 0, 0);
+//    p.setInitialCondition(ofGetWidth()/2, ofGetHeight()/2, ofRandom(-10.10), ofRandom(-10, 10));
     
-    sphere_x = ofRandom(0, ofGetWidth());
-    sphere_y = 0;
-    
-    for (int i=0; i<num; i++) {
-        xArray[i] = ofRandom(0, ofGetWidth());
-        yArray[i] = ofRandom(-30, 0);
-    }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    sphere_y = sphere_y + ofGetFrameNum()/15;
+    for (int i=0; i<particles.size(); i++) {
+        particles[i].resetForce();
+        particles[i].addForce(0, 0.1);
+        particles[i].addDampingForce();
+        particles[i].update();
+    }
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-//    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+//    backGroundImage.draw(0, 0, ofGetWidth(), ofGetHeight());
+    ofSetColor(255, 255, 255);
+    for (int i=0; i<particles.size(); i++) {
+        particles[i].draw();
+    }
+//    p.draw();
     
-    for (int i=0; i < num; i++) {
-        sphere[i].setPosition(xArray[i], sphere_y, yArray[i]);
-        sphere[i].set(10, 16);
-        //        sphere.drawWireframe();
-    }
-    for (int i=1; i<num; i++) {
-        sphere[i].draw();
-    }
    
 }
 
@@ -57,7 +55,11 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    particles.clear();
+    for (int i=0; i<particles.size(); i++) {
+        particles[i].setInitialCondition(x, y, ofRandom(-10, 10), ofRandom(-10, 10));
+    }
+    
 }
 
 //--------------------------------------------------------------

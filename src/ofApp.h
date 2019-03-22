@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Particle.hpp"
+
+#define NUM 100
 
 class ofApp : public ofBaseApp{
 
@@ -20,11 +23,8 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
-    int num = 120;
-    int liquidArray[120];
-    ofSpherePrimitive sphere[120], sBox[120];
     
-    int sphere_x, xArray[120];
-    int sphere_y, yArray[120];
+//    Particle p[100];
+    vector <Particle> particles;
+//    ofImage backGroundImage;
 };
