@@ -26,5 +26,6 @@ class ofApp : public ofBaseApp{
     
 //    Particle p[100];
     vector <Particle> particles;
-//    ofImage backGroundImage;
+    ofImage backGroundImage;
+    ofColor colorArray[10];
 };
